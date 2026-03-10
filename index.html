@@ -6,7 +6,7 @@
   <title>1 LEGGED PIGEON — 25 Martin Place</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;0,14..32,900;1,14..32,400;1,14..32,700;1,14..32,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700;1,6..96,900&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;0,14..32,900;1,14..32,400;1,14..32,700;1,14..32,900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -36,7 +36,7 @@
 
     /* ── HERO TITLE ── */
     .hero-title {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Bodoni Moda', Georgia, serif;
       font-size: clamp(80px, 18vw, 220px);
       font-weight: 900;
       line-height: 0.85;
@@ -53,7 +53,7 @@
     }
 
     .hero-title span.red {
-      color: #8C0000;
+      color: #f5c518;
     }
 
     /* ── LOGO HEADER ── */
@@ -80,9 +80,10 @@
     .hero {
       position: relative;
       overflow: hidden;
-      min-height: 520px;
+      min-height: 680px;
       display: flex;
       flex-direction: column;
+      padding: 0 32px;
     }
 
     .title-row {
@@ -90,36 +91,24 @@
       align-items: flex-start;
       position: relative;
       z-index: 2;
+      width: 100%;
     }
 
     /* ── PIGEON PHOTO ── */
     .pigeon-wrap {
-      position: relative;
-      display: inline-block;
-      margin-top: 20px;
-      margin-left: 30px;
-      z-index: 3;
       flex-shrink: 0;
-      width: 300px;
+      align-self: flex-end;
+      width: clamp(300px, 46vw, 560px);
+      pointer-events: none;
     }
 
     .pigeon-wrap img {
       width: 100%;
-      height: 380px;
-      object-fit: cover;
-      object-position: center 20%;
+      height: auto;
       display: block;
-      filter: saturate(0.75) contrast(1.15) brightness(0.9);
-    }
-
-    .pigeon-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to right, rgba(0,0,0,0.35) 0%, transparent 30%),
-        linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8) 100%);
-      pointer-events: none;
+      filter: saturate(0.85) contrast(1.1);
+      mix-blend-mode: luminosity;
+      opacity: 0.92;
     }
 
     /* ── TUBELIGHT NAV ── */
@@ -260,36 +249,39 @@
       margin-bottom: 16px;
       color: #fff;
       position: relative;
+      z-index: 1;
     }
 
     .content-box h2 {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Bodoni Moda', Georgia, serif;
       font-size: 22px;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #ffffff;
+      color: #f5c518;
       margin-bottom: 12px;
-      border-bottom: 2px solid #8C0000;
-      padding-bottom: 8px;
       font-style: italic;
     }
 
     .content-box p {
       font-size: 13px;
       line-height: 1.8;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.9);
       margin-bottom: 10px;
     }
 
+    .content-box strong {
+      color: #f5c518;
+    }
+
     .content-box a {
-      color: #c0392b;
+      color: #f5c518;
       text-decoration: none;
     }
 
     .content-box a:hover {
       text-decoration: underline;
-      color: #e74c3c;
+      color: #ffd700;
     }
 
     /* ── TWO-COLUMN LAYOUT ── */
@@ -367,7 +359,7 @@
 
     .image-row img {
       flex: 1;
-      height: 120px;
+      height: 220px;
       object-fit: cover;
       filter: saturate(0.7) contrast(1.1);
     }
@@ -386,12 +378,12 @@
     }
 
     footer a {
-      color: #8C0000;
+      color: #f5c518;
       text-decoration: none;
     }
 
     footer a:hover {
-      color: #c0392b;
+      color: #ffd700;
     }
 
     /* ── BLINKING CURSOR EFFECT ── */
@@ -406,16 +398,16 @@
 
     /* ── MARQUEE ── */
     .marquee-bar {
-      background: #8C0000;
+      background: #f5e800;
       overflow: hidden;
       white-space: nowrap;
       padding: 4px 0;
       font-size: 11px;
-      color: #fff;
+      color: #000000;
       letter-spacing: 0.15em;
       margin-bottom: 12px;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      border-top: 1px solid rgba(0,0,0,0.15);
+      border-bottom: 1px solid rgba(0,0,0,0.15);
     }
 
     .marquee-inner {
@@ -479,21 +471,129 @@
       padding: 16px 24px 16px 8px;
     }
 
-    /* ── SHADER BACKGROUND ── */
+    /* ── WARP BACKGROUND ── */
     .shader-bg {
       position: absolute;
       inset: 0;
       z-index: 0;
       overflow: hidden;
       pointer-events: none;
+      background: hsl(260deg 100% 3%);
+      container-type: size;
+      clip-path: inset(0);
     }
 
-    .shader-bg canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
+    .warp-perspective {
+      position: absolute;
+      inset: 0;
+      perspective: 100px;
+      transform-style: preserve-3d;
+      clip-path: inset(0);
+      container-type: size;
+    }
+
+    .warp-face {
+      position: absolute;
+      --grid-color: rgba(255, 255, 255, 0.1);
+      background-image:
+        linear-gradient(var(--grid-color) 0 1px, transparent 1px 100%),
+        linear-gradient(90deg, var(--grid-color) 0 1px, transparent 1px 100%);
+      background-size: 5% 5%;
+      background-position: 50% -0.5px, 50% 50%;
+      container-type: inline-size;
+      transform-style: preserve-3d;
+      overflow: hidden;
+    }
+
+    .warp-face-top {
+      width: 100%;
+      height: 100cqmax;
+      top: 0; left: 0;
+      transform-origin: 50% 0%;
+      transform: rotateX(-90deg);
+    }
+
+    .warp-face-bottom {
+      width: 100%;
+      height: 100cqmax;
+      top: 100%; left: 0;
+      transform-origin: 50% 0%;
+      transform: rotateX(-90deg);
+    }
+
+    .warp-face-left {
+      height: 100cqmax;
+      top: 0; left: 0;
+      transform-origin: 0% 0%;
+      transform: rotate(90deg) rotateX(-90deg);
+    }
+
+    .warp-face-right {
+      height: 100cqmax;
+      top: 0; right: 0;
+      transform-origin: 100% 0%;
+      transform: rotate(-90deg) rotateX(-90deg);
+    }
+
+    .warp-beam {
+      position: absolute;
+      top: 0;
+      animation: warp-beam-move 3s linear infinite;
+    }
+
+    @keyframes warp-beam-move {
+      from { transform: translateX(-50%) translateY(300vh); }
+      to   { transform: translateX(-50%) translateY(-200%); }
+    }
+
+    /* ── PAGE SECTIONS ── */
+    .page-section {
+      position: relative;
+    }
+
+    /* ── RETRO GRID BACKGROUND ── */
+    .retro-grid {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
       opacity: 0.45;
-      mix-blend-mode: screen;
+      perspective: 200px;
+      z-index: 0;
+    }
+
+    .retro-grid-plane {
+      position: absolute;
+      inset: 0;
+      transform: rotateX(65deg);
+    }
+
+    .retro-grid-lines {
+      position: absolute;
+      background-repeat: repeat;
+      background-size: 60px 60px;
+      height: 300vh;
+      width: 600vw;
+      inset: 0;
+      margin-left: -50%;
+      transform-origin: 100% 0 0;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 0),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 0);
+      animation: retro-grid-scroll 15s linear infinite;
+    }
+
+    .retro-grid-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #000 0%, transparent 90%);
+    }
+
+    @keyframes retro-grid-scroll {
+      0%   { transform: translateY(-50%); }
+      100% { transform: translateY(0); }
     }
 
     .hero {
@@ -503,6 +603,75 @@
     .title-row {
       position: relative;
       z-index: 2;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      body {
+        margin: 4px;
+      }
+
+      .page-wrap {
+        padding: 6px 0;
+      }
+
+      .logo-header img {
+        max-width: 260px;
+      }
+
+      .nav-pill {
+        flex-wrap: wrap;
+        border-radius: 16px;
+        justify-content: center;
+        gap: 0;
+      }
+
+      .nav-pill a {
+        font-size: 9px;
+        padding: 5px 10px;
+        letter-spacing: 0.1em;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .title-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-title {
+        font-size: clamp(72px, 22vw, 120px);
+      }
+
+      .pigeon-wrap {
+        margin-left: 0;
+        margin-top: 12px;
+        width: 100%;
+      }
+
+      .pigeon-wrap img {
+        height: 260px;
+      }
+
+      .content-box {
+        padding: 16px;
+      }
+
+      .content-box h2 {
+        font-size: 18px;
+      }
+
+      .image-row {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .image-row img {
+        height: 220px;
+        width: 100%;
+      }
     }
 
   </style>
@@ -547,13 +716,11 @@
         <div class="nav-indicator" id="nav-indicator">
           <div class="nav-lamp"></div>
         </div>
-        <a href="#" class="active">HOME</a>
-        <a href="#">ABOUT</a>
-        <a href="#">EVENTS</a>
-        <a href="#">MEMBERS</a>
-        <a href="#">PHOTOS</a>
-        <a href="#">CONTACT</a>
-        <a href="#">LINKS</a>
+        <a href="#" class="active" data-page="home">HOME</a>
+        <a href="#" data-page="pigeons">PIGEONS</a>
+        <a href="#" data-page="about">ABOUT</a>
+        <a href="#" data-page="photos">PHOTOS</a>
+        <a href="#" data-page="products">PRODUCTS</a>
       </div>
     </nav>
 
@@ -564,119 +731,110 @@
       </span>
     </div>
 
-    <!-- HERO: Title + Pigeon -->
-    <section class="hero">
-      <!-- Shader animation background -->
-      <div class="shader-bg" id="shader-container"></div>
-      <div class="title-row">
-        <div class="hero-title">
-          1<br>LEG<br>GED<br><span class="red">PIG</span><br><span class="red">EON</span>
-        </div>
-
-        <!-- Pigeon photo -->
-        <div class="pigeon-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1534695941753-73cf13435eb4?auto=format&fit=crop&w=600&q=80"
-            alt="A pigeon — the one-legged kind"
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- MAIN CONTENT + SIDEBAR -->
-    <div class="two-col">
-
-      <!-- MAIN -->
-      <div>
-        <div class="content-box">
-          <h2>Latest News</h2>
-          <p>
-            <strong>March 2026 —</strong> Welcome back to another week at 25 Martin Place.
-            The community is growing — if you know anyone working in the building who'd like to join,
-            point them our way. See the <a href="#">events page</a> for what's coming up.
-          </p>
-          <p>
-            Last week's gathering was a great one — thank you to everyone who came along and made it happen.
-            Photos from the evening are now up in the <a href="#">photos section</a>.
-          </p>
-
-          <div class="image-row">
-            <img src="https://placehold.co/200x120/0A1938/1a3060?text=+" alt="Photo 1" />
-            <img src="https://placehold.co/200x120/0d1a40/162050?text=+" alt="Photo 2" />
-            <img src="https://placehold.co/200x120/0A1938/1a3060?text=+" alt="Photo 3" />
+    <!-- PAGE: HOME (default) -->
+    <div class="page-section" id="sec-home">
+      <section class="hero">
+        <div class="shader-bg" id="shader-container">
+          <div class="warp-perspective">
+            <div class="warp-face warp-face-top" id="warp-top"></div>
+            <div class="warp-face warp-face-bottom" id="warp-bottom"></div>
+            <div class="warp-face warp-face-left" id="warp-left"></div>
+            <div class="warp-face warp-face-right" id="warp-right"></div>
           </div>
+        </div>
+        <div class="title-row">
+          <div class="hero-title">
+            1<br>LEG<br>GED<br><span class="red">PIG</span><br><span class="red">EON</span>
+          </div>
+          <div class="pigeon-wrap" id="pigeon-home">
+            <img
+              src="brand_assets/onelegpigeon.png"
+              alt="The one-legged pigeon of 25 Martin Place"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
 
-          <p>
-            <strong>February 2026 —</strong> The <em>1 Legged Pigeon</em> community directory is live.
-            Find your fellow building dwellers and connect with AIS members across levels.
-            Reach out via the <a href="#">contact page</a> to get listed.
-          </p>
+    <!-- PAGE: PIGEONS -->
+    <div class="page-section" id="sec-pigeons" style="display:none">
+      <div class="retro-grid">
+        <div class="retro-grid-plane"><div class="retro-grid-lines"></div></div>
+        <div class="retro-grid-fade"></div>
+      </div>
+      <div class="content-box">
+        <h2>Latest News</h2>
+        <p>
+          <strong>March 2026 —</strong> Welcome back to another week at 25 Martin Place.
+          The community is growing — if you know anyone working in the building who'd like to join,
+          point them our way.
+        </p>
+        <p>
+          Last week's gathering was a great one — thank you to everyone who came along and made it happen.
+        </p>
+
+        <div class="image-row">
+          <img src="https://images.unsplash.com/photo-1761981987482-2d39468d1edc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="One-legged pigeon" />
+          <img src="https://images.unsplash.com/photo-1741384019035-9832956a2037?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="One-legged pigeon close-up" />
+          <img src="https://images.unsplash.com/photo-1723302642167-5b1ea8a4dc75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Pigeon on the ground" />
         </div>
 
-        <div class="content-box">
-          <h2>About</h2>
-          <p>
-            1 Legged Pigeon is the community of people working at 25 Martin Place, Sydney —
-            home of the Australian Institute of Superannuation (AIS). Named after the
-            resilient one-legged pigeon who frequents the building's forecourt and refuses to quit.
-          </p>
-          <p>
-            We are AIS members, building tenants, and friends who share a space and a city.
-            This is our corner of the internet — minimal, intentional, and ours.
-          </p>
+        <p>
+          <strong>February 2026 —</strong> The <em>1 Legged Pigeon</em> community directory is live.
+          Find your fellow building dwellers and connect with AIS members across levels.
+          Reach out via the <a href="#" data-page="about">contact page</a> to get listed.
+        </p>
+      </div>
+    </div>
+
+    <!-- PAGE: ABOUT -->
+    <div class="page-section" id="sec-about" style="display:none">
+      <div class="retro-grid">
+        <div class="retro-grid-plane"><div class="retro-grid-lines"></div></div>
+        <div class="retro-grid-fade"></div>
+      </div>
+      <div class="content-box">
+        <h2>About</h2>
+        <p>
+          1 Legged Pigeon is the community of people working at 25 Martin Place, Sydney —
+          home of the Australian Institute of Superannuation (AIS). Named after the
+          resilient one-legged pigeon who frequents the building's forecourt and refuses to quit.
+        </p>
+        <p>
+          We are AIS members, building tenants, and friends who share a space and a city.
+          This is our corner of the internet — minimal, intentional, and ours.
+        </p>
+
+        <div class="image-row">
+          <img src="https://images.unsplash.com/photo-1549450468-e036c2759988?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="MLC Centre Sydney — low angle view" />
+          <img src="https://images.unsplash.com/photo-1546090132-ca96bcb81570?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Curved building at Martin Place Sydney" />
+          <img src="https://images.unsplash.com/photo-1549448380-10cbfd2c1e94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="MLC Centre Sydney — corner view" />
         </div>
       </div>
+    </div>
 
-      <!-- SIDEBAR -->
-      <div>
-        <div class="sidebar-box" style="margin-bottom: 16px;">
-          <h3>Upcoming Events</h3>
-          <ul>
-            <li>
-              <span class="show-date">MAR 14</span>
-              <a href="#">Friday Drinks — Level 8</a>
-            </li>
-            <li>
-              <span class="show-date">MAR 21</span>
-              <a href="#">Lunch Walk — Martin Place</a>
-            </li>
-            <li>
-              <span class="show-date">APR 3</span>
-              <a href="#">Community Catch-Up</a>
-            </li>
-            <li>
-              <span class="show-date">APR 11</span>
-              <a href="#">Guest Speaker Evening</a>
-            </li>
-            <li>
-              <span class="show-date">APR 25</span>
-              <a href="#">ANZAC Day Gathering</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sidebar-box" style="margin-bottom: 16px;">
-          <h3>Community</h3>
-          <ul>
-            <li><a href="#">AIS — aissuper.com.au</a></li>
-            <li><a href="#">Member Directory</a></li>
-            <li><a href="#">Building Noticeboard</a></li>
-            <li><a href="#">Photo Archive</a></li>
-          </ul>
-        </div>
-
-        <div class="sidebar-box">
-          <h3>Links</h3>
-          <ul>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">AIS Website</a></li>
-            <li><a href="#">25 Martin Place</a></li>
-            <li><a href="#">Get in Touch</a></li>
-          </ul>
-        </div>
+    <!-- PAGE: PHOTOS -->
+    <div class="page-section" id="sec-photos" style="display:none">
+      <div class="retro-grid">
+        <div class="retro-grid-plane"><div class="retro-grid-lines"></div></div>
+        <div class="retro-grid-fade"></div>
       </div>
+      <div class="content-box">
+        <h2>Photos</h2>
+        <p>Photo archive coming soon.</p>
+      </div>
+    </div>
 
+    <!-- PAGE: PRODUCTS -->
+    <div class="page-section" id="sec-products" style="display:none">
+      <div class="retro-grid">
+        <div class="retro-grid-plane"><div class="retro-grid-lines"></div></div>
+        <div class="retro-grid-fade"></div>
+      </div>
+      <div class="content-box">
+        <h2>Products</h2>
+        <p>Coming soon.</p>
+      </div>
     </div>
 
     <!-- FOOTER -->
@@ -688,89 +846,58 @@
 
   </div>
 
-  <script type="module">
-    import * as THREE from "three"
+  <script>
+    // ── WARP BACKGROUND BEAM GENERATOR ──
+    ;(function setupWarpBackground() {
+      const BEAMS_PER_SIDE = 3
+      const BEAM_SIZE = 5        // % width of each beam
+      const DURATION_BASE = 3   // seconds
+      const DURATION_SPREAD = 2
+      const DELAY_MAX = 3
 
-    const container = document.getElementById("shader-container")
-    if (!container) throw new Error("shader-container not found")
+      const faces = ['top', 'bottom', 'left', 'right']
 
-    const vertexShader = `
-      void main() {
-        gl_Position = vec4( position, 1.0 );
-      }
-    `
+      faces.forEach(side => {
+        const face = document.getElementById('warp-' + side)
+        if (!face) return
 
-    const fragmentShader = `
-      #define TWO_PI 6.2831853072
-      #define PI 3.14159265359
-
-      precision highp float;
-      uniform vec2 resolution;
-      uniform float time;
-
-      void main(void) {
-        vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
-        float t = time*0.05;
-        float lineWidth = 0.002;
-
-        vec3 color = vec3(0.0);
-        for(int j = 0; j < 3; j++){
-          for(int i=0; i < 5; i++){
-            color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.01)*5.0 - length(uv) + mod(uv.x+uv.y, 0.2));
-          }
+        // Set left/right face widths to container height
+        if (side === 'left' || side === 'right') {
+          const hero = document.querySelector('.hero')
+          if (hero) face.style.width = hero.offsetHeight + 'px'
         }
 
-        gl_FragColor = vec4(color[0],color[1],color[2],1.0);
-      }
-    `
+        const cellsPerSide = Math.floor(100 / BEAM_SIZE)
+        const step = cellsPerSide / BEAMS_PER_SIDE
 
-    const camera = new THREE.Camera()
-    camera.position.z = 1
+        for (let i = 0; i < BEAMS_PER_SIDE; i++) {
+          const xCell = Math.floor(i * step)
+          const xPct = xCell * BEAM_SIZE
+          const delay = Math.random() * DELAY_MAX
+          const hue = Math.floor(Math.random() * 360)
+          const ar = Math.floor(Math.random() * 10) + 1
+          const duration = DURATION_BASE + Math.random() * DURATION_SPREAD
 
-    const scene = new THREE.Scene()
-    const geometry = new THREE.PlaneGeometry(2, 2)
-
-    const uniforms = {
-      time:       { value: 1.0 },
-      resolution: { value: new THREE.Vector2() },
-    }
-
-    const material = new THREE.ShaderMaterial({
-      uniforms,
-      vertexShader,
-      fragmentShader,
-    })
-
-    scene.add(new THREE.Mesh(geometry, material))
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-    renderer.setPixelRatio(window.devicePixelRatio)
-    container.appendChild(renderer.domElement)
-
-    function resize() {
-      const w = container.clientWidth
-      const h = container.clientHeight
-      renderer.setSize(w, h)
-      uniforms.resolution.value.set(renderer.domElement.width, renderer.domElement.height)
-    }
-
-    resize()
-    window.addEventListener("resize", resize)
-
-    let animId
-    function animate() {
-      animId = requestAnimationFrame(animate)
-      uniforms.time.value += 0.05
-      renderer.render(scene, camera)
-    }
-    animate()
+          const beam = document.createElement('span')
+          beam.className = 'warp-beam'
+          beam.style.left = xPct + '%'
+          beam.style.width = BEAM_SIZE + '%'
+          beam.style.aspectRatio = '1 / ' + ar
+          beam.style.background = 'linear-gradient(hsl(' + hue + ' 80% 60%), transparent)'
+          beam.style.animationDuration = duration + 's'
+          beam.style.animationDelay = '-' + delay + 's'
+          face.appendChild(beam)
+        }
+      })
+    })()
   </script>
 
   <script>
-    // ── TUBELIGHT NAV ──
+    // ── TUBELIGHT NAV + PAGE SWITCHING ──
     const navPill = document.getElementById('nav-pill')
     const indicator = document.getElementById('nav-indicator')
-    const navLinks = navPill.querySelectorAll('a')
+    const navLinks = navPill.querySelectorAll('a[data-page]')
+    const sections = document.querySelectorAll('.page-section')
 
     function moveIndicator(el) {
       const pillRect = navPill.getBoundingClientRect()
@@ -779,19 +906,35 @@
       indicator.style.width = elRect.width + 'px'
     }
 
-    // Init on load — wait a frame so layout is settled
+    function showPage(page) {
+      sections.forEach(s => s.style.display = 'none')
+      const target = document.getElementById('sec-' + page)
+      if (target) target.style.display = 'block'
+      const pigeonEl = document.getElementById('pigeon-home')
+      if (pigeonEl) pigeonEl.style.display = page === 'home' ? 'block' : 'none'
+    }
+
+    // Handle inline links that switch pages (e.g. data-page on anchor tags in content)
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a[data-page]')
+      if (!link) return
+      e.preventDefault()
+      const page = link.dataset.page
+      // Update nav active state
+      navLinks.forEach(l => l.classList.remove('active'))
+      const navLink = navPill.querySelector(`a[data-page="${page}"]`)
+      if (navLink) {
+        navLink.classList.add('active')
+        moveIndicator(navLink)
+      }
+      showPage(page)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    })
+
+    // Init on load
     requestAnimationFrame(() => {
       const active = navPill.querySelector('a.active')
       if (active) moveIndicator(active)
-    })
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault()
-        navLinks.forEach(l => l.classList.remove('active'))
-        this.classList.add('active')
-        moveIndicator(this)
-      })
     })
 
     window.addEventListener('resize', () => {
