@@ -605,6 +605,70 @@
       z-index: 2;
     }
 
+    /* ── PIGEON BUTTON ── */
+    .ipod-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 16px 32px 8px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .pigeon-btn-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pigeon-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: block;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
+    }
+
+    .pigeon-btn:hover {
+      transform: scale(1.08) rotate(-4deg);
+      filter: drop-shadow(0 5px 14px rgba(0,0,0,0.6));
+    }
+
+    .pigeon-btn:active {
+      transform: scale(0.93) rotate(2deg);
+    }
+
+    .pigeon-btn.is-open {
+      transform: scale(1.06) rotate(5deg);
+      filter: drop-shadow(0 4px 12px rgba(245,197,24,0.3));
+    }
+
+    .pigeon-svg {
+      width: 52px;
+      height: 68px;
+      display: block;
+    }
+
+    .pigeon-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.06em;
+      text-align: center;
+      transition: color 0.2s ease;
+      pointer-events: none;
+    }
+
+    .pigeon-btn-wrap:hover .pigeon-label {
+      color: rgba(255,255,255,0.7);
+    }
+
+
+
     /* ── MOBILE ── */
     @media (max-width: 640px) {
       body {
@@ -754,7 +818,62 @@
           </div>
         </div>
       </section>
-    </div>
+
+      <!-- PIGEON BUTTON + IPOD PLAYER -->
+      <div class="ipod-container">
+
+        <!-- Pigeon trigger button -->
+        <div class="pigeon-btn-wrap" id="pigeon-btn-wrap">
+          <button class="pigeon-btn" id="pigeon-btn" aria-label="Press me, I'm a star!">
+            <svg class="pigeon-svg" viewBox="0 0 68 88" xmlns="http://www.w3.org/2000/svg">
+              <!-- Hat brim -->
+              <ellipse cx="29" cy="18" rx="16" ry="3.5" fill="#1a1a1a"/>
+              <!-- Hat crown -->
+              <rect x="19" y="4" width="20" height="14" rx="2" fill="#111"/>
+              <!-- Hat band -->
+              <rect x="19" y="14" width="20" height="3" fill="#f5c518" rx="0.5"/>
+              <!-- Head -->
+              <ellipse cx="30" cy="28" rx="13" ry="12" fill="#5a5a60"/>
+              <!-- Neck / body join -->
+              <ellipse cx="31" cy="38" rx="12" ry="8" fill="#48484e"/>
+              <!-- Body -->
+              <ellipse cx="33" cy="56" rx="18" ry="16" fill="#4a4a52"/>
+              <!-- Wing sheen -->
+              <ellipse cx="26" cy="57" rx="10" ry="11" fill="#3e3e46" transform="rotate(-8 26 57)"/>
+              <!-- Chest iridescence -->
+              <ellipse cx="38" cy="50" rx="7" ry="9" fill="#5c5870" opacity="0.7"/>
+              <!-- Eye white -->
+              <circle cx="36" cy="27" r="4" fill="#e8d8a0"/>
+              <!-- Eye iris -->
+              <circle cx="36.5" cy="27" r="2.6" fill="#c8a230"/>
+              <!-- Eye pupil -->
+              <circle cx="37" cy="27" r="1.4" fill="#111"/>
+              <!-- Eye glint -->
+              <circle cx="37.6" cy="26.2" r="0.5" fill="white"/>
+              <!-- Beak upper -->
+              <path d="M42 29 Q50 28 51 31 Q50 34 42 33Z" fill="#c8a000"/>
+              <!-- Beak lower -->
+              <path d="M42 33 Q49 33 51 31 Q50 35 42 34Z" fill="#a88000"/>
+              <!-- Nostril -->
+              <ellipse cx="47" cy="30" rx="1.5" ry="0.8" fill="#9a7800" opacity="0.7"/>
+              <!-- Tail feathers -->
+              <path d="M20 68 Q12 76 10 84 Q16 80 22 76 Q18 82 20 88 Q26 82 26 74Z" fill="#3a3a42"/>
+              <!-- One leg -->
+              <line x1="36" y1="72" x2="36" y2="84" stroke="#b8900a" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- Foot toes -->
+              <line x1="36" y1="84" x2="29" y2="88" stroke="#b8900a" stroke-width="2" stroke-linecap="round"/>
+              <line x1="36" y1="84" x2="36" y2="88" stroke="#b8900a" stroke-width="2" stroke-linecap="round"/>
+              <line x1="36" y1="84" x2="43" y2="88" stroke="#b8900a" stroke-width="2" stroke-linecap="round"/>
+              <!-- Spur (back toe) -->
+              <line x1="36" y1="84" x2="40" y2="87" stroke="#b8900a" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="pigeon-label">press me, i'm a star!</div>
+        </div>
+
+        <audio id="pigeon-audio" src="brand_assets/unwritten.mp4" preload="none"></audio>
+      </div>
+    </div><!-- /#sec-home end -->
 
     <!-- PAGE: PIGEONS -->
     <div class="page-section" id="sec-pigeons" style="display:none">
@@ -941,6 +1060,26 @@
       const active = navPill.querySelector('a.active')
       if (active) moveIndicator(active)
     })
+  </script>
+
+  <script>
+    // ── PIGEON BUTTON + AUDIO PLAYER ──
+    ;(function() {
+      const btn   = document.getElementById('pigeon-btn')
+      const audio = document.getElementById('pigeon-audio')
+
+      btn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play()
+          btn.classList.add('is-open')
+        } else {
+          audio.pause()
+          btn.classList.remove('is-open')
+        }
+      })
+
+      audio.addEventListener('ended', () => btn.classList.remove('is-open'))
+    })()
   </script>
 
   <script>
