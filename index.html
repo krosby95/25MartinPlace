@@ -680,6 +680,45 @@
 
 
 
+    /* ── VELOCITY MARQUEE ── */
+    .vel-marquee-wrap {
+      overflow: hidden;
+      margin: 8px -28px;
+    }
+
+    .vel-marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 4px 0;
+    }
+
+    .vel-marquee-inner {
+      display: inline-flex;
+      gap: 0;
+      will-change: transform;
+    }
+
+    .vel-marquee-inner span {
+      font-family: 'Bodoni Moda', Georgia, serif;
+      font-size: clamp(22px, 5vw, 52px);
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #fff;
+      padding-right: 40px;
+      display: block;
+    }
+
+    .vel-marquee:nth-child(2) .vel-marquee-inner span {
+      color: #f5c518;
+    }
+
+    .vel-marquee:nth-child(3) .vel-marquee-inner span {
+      color: rgba(255,255,255,0.35);
+      font-size: clamp(14px, 3vw, 32px);
+    }
+
     /* ── TIKTOK GRID ── */
     .tiktok-grid {
       display: grid;
@@ -1125,31 +1164,40 @@
       </div>
       <div class="content-box">
         <h2>About</h2>
-        <p>
-          В каждом городе на Земле существует СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ, которую люди притворяются не замечать!!! Правительства это отрицают!!! Экономисты это игнорируют!!! Но если вы посмотрите на ближайшую статую и увидите голубя, который медленно моргает на солнце… ЭТО НЕ ПРОСТО ПТИЦА!!! Это МЕНЕДЖМЕНТ!!! КУУУ!!!
-Люди думают, что голуби это просто глупые серые птицы, которые дерутся за хлебные крошки. Это ОФИЦИАЛЬНАЯ ВЕРСИЯ!!! Удобная легенда!!! Очень удобная ложь!!! Потому что правда гораздо страннее и немного тревожнее!!! ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! Тихо!!! Стратегически!!! Иногда при этом крича КУУ КУУ!!! на бублик!!!
-Где-то внутри высокого стеклянного небоскрёба голубь в немного кривом галстуке совершенно точно присутствует на заседании совета директоров в BlackRock!!! Люди думают, что именно они принимают финансовые решения!!! Но голубь на подоконнике медленно кивает и тихо говорит куу… одобрено!!!
-Но общество голубей хаотично и несправедливо!!! Не все голуби одинаковы!!! Некоторые голуби это ЭЛИТА КРЫШ с лучшими статуями и подозрительно инвестиционной энергетикой!!! Другие голуби бродят по вокзалам и изучают упавшую картошку фри так, будто она содержит секреты вселенной!!!
-А ещё есть слухи об их ПИТАНИИ!!!
-Очень тревожные слухи!!!
-Некоторые крайне сомнительные источники из переулков утверждают, что самые могущественные голуби собираются в секретных подземных банкетных залах!!! Маленькие голуби в смокингах сидят за мраморным столом!!! Слуги выкатывают серебряные подносы!!! А на подносах… нечто шокирующее!!!
-По слухам… элита ест исчезающие деликатесы!!! Некоторые утверждают, что они пробовали мясо величественного White Rhinoceros!!!
-Да!!! Голубь размером с буханку хлеба осторожно клюёт невероятно дорогой микроскопический кусочек мяса носорога и шепчет куу… изысканно… потрясающе…
-НО САМОЕ СТРАННОЕ ВОТ ЧТО!!!
-Несмотря на контроль над финансами!!! Несмотря на секретные роскошные ужины!!! Несмотря на владение половиной городских крыш!!! У голубей УЖАСНАЯ САМООЦЕНКА!!!
-Голубь может манипулировать мировыми рынками утром!!! А потом днём смотреть на своё отражение в луже и думать:
-«вау… я выгляжу как слегка мокрая картошка с крыльями…»
-Они ходят важной походкой!!! Надувают грудь!!! Кричат КУУ!!! КУУ!!! на прохожих!!! Но глубоко внутри переживают, что чайки считают их смешными!!!
-Поэтому когда вы видите голубей, стоящих кругом в парке и кричащих КУУ КУУ КУУ!!!, НЕ думайте, что они обсуждают хлебные крошки!!!
-Возможно, они обсуждают мировые финансы!!!
-Возможно, они планируют следующий очень незаконный ужин с исчезающими видами!!!
-Или они просто переживают, что их перья на шее выглядят глупо сегодня!!!
-Потому что голуби могущественны!!!
-Голуби хаотичны!!!
-И в глубине души каждый из них всего лишь странная тревожная птица, пытающаяся чувствовать себя нормально на статуе посреди громкого и запутанного города!!!
-КУУ!!!
+        <div class="vel-marquee-wrap">
+          <div class="vel-marquee" id="vm-1" data-velocity="-3">
+            <div class="vel-marquee-inner">
+              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
+              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
+              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
+              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
+              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
+              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
+            </div>
+          </div>
+          <div class="vel-marquee" id="vm-2" data-velocity="3">
+            <div class="vel-marquee-inner">
+              <span>ЭТО НЕ ПРОСТО ПТИЦА — ЭТО МЕНЕДЖМЕНТ!!! КУУ!!! ★</span>
+              <span>ЭТО НЕ ПРОСТО ПТИЦА — ЭТО МЕНЕДЖМЕНТ!!! КУУ!!! ★</span>
+              <span>ЭТО НЕ ПРОСТО ПТИЦА — ЭТО МЕНЕДЖМЕНТ!!! КУУ!!! ★</span>
+              <span>ЭТО НЕ ПРОСТО ПТИЦА — ЭТО МЕНЕДЖМЕНТ!!! КУУ!!! ★</span>
+            </div>
+          </div>
+          <div class="vel-marquee" id="vm-3" data-velocity="-2">
+            <div class="vel-marquee-inner">
+              <span>СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ ★ ЭЛИТА КРЫШ ★ КУУ КУУ КУУ ★</span>
+              <span>СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ ★ ЭЛИТА КРЫШ ★ КУУ КУУ КУУ ★</span>
+              <span>СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ ★ ЭЛИТА КРЫШ ★ КУУ КУУ КУУ ★</span>
+              <span>СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ ★ ЭЛИТА КРЫШ ★ КУУ КУУ КУУ ★</span>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:24px;font-size:12px;line-height:1.9;color:rgba(255,255,255,0.7)">
+          В каждом городе на Земле существует СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ, которую люди притворяются не замечать!!!
+          Правительства это отрицают!!! Экономисты это игнорируют!!! Но если вы посмотрите на ближайшую статую
+          и увидите голубя, который медленно моргает на солнце… ЭТО НЕ ПРОСТО ПТИЦА!!! Это МЕНЕДЖМЕНТ!!! КУУУ!!!
         </p>
-        <p>
+        <p style="font-size:12px;line-height:1.9;color:rgba(255,255,255,0.7)">
          Coo cooo cococoo coo coo coo coo
         </p>
 
@@ -1318,6 +1366,62 @@
       const active = navPill.querySelector('a.active')
       if (active) moveIndicator(active)
     })
+  </script>
+
+  <script>
+    // ── VELOCITY MARQUEE ──
+    ;(function() {
+      const rows = document.querySelectorAll('.vel-marquee')
+      if (!rows.length) return
+
+      let lastScrollY = window.scrollY
+      let scrollVel = 0   // smoothed scroll velocity
+      let lastTime = performance.now()
+
+      rows.forEach(row => {
+        const inner = row.querySelector('.vel-marquee-inner')
+        const baseVel = parseFloat(row.dataset.velocity) || -3
+        let pos = 0
+        row._inner = inner
+        row._baseVel = baseVel
+        row._pos = 0
+      })
+
+      function tick(now) {
+        const dt = Math.min(now - lastTime, 50)
+        lastTime = now
+
+        // Track scroll velocity
+        const curScroll = window.scrollY
+        const rawDelta = curScroll - lastScrollY
+        lastScrollY = curScroll
+        scrollVel += (rawDelta - scrollVel) * 0.15  // smooth
+
+        rows.forEach(row => {
+          const inner = row._inner
+          const baseVel = row._baseVel
+
+          // Speed boost from scroll, capped
+          const boost = Math.max(-5, Math.min(5, scrollVel * 0.04))
+          const move = baseVel * (dt / 1000) * 100 + boost * Math.sign(baseVel)
+
+          row._pos += move
+
+          // Wrap: get width of one span copy and reset when past it
+          const copyWidth = inner.children[0].offsetWidth
+          if (copyWidth > 0) {
+            if (row._pos <= -copyWidth) row._pos += copyWidth
+            if (row._pos >= 0) row._pos -= copyWidth
+          }
+
+          inner.style.transform = `translateX(${row._pos}px)`
+        })
+
+        requestAnimationFrame(tick)
+      }
+
+      requestAnimationFrame(tick)
+    })()
   </script>
 
   <script>
