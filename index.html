@@ -156,7 +156,7 @@
       transform: translateX(-50%);
       width: 28px;
       height: 3px;
-      background: #8C0000;
+      background: #fff700;
       border-radius: 0 0 4px 4px;
       transition: none;
     }
@@ -366,12 +366,12 @@
 
     /* ── FOOTER ── */
     footer {
-      background: rgba(5,12,35,0.9);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgb(0, 0, 0);
       padding: 14px 20px;
       text-align: center;
-      font-size: 10px;
-      color: rgba(255,255,255,0.4);
+      font-size: 5px;
+      color: rgba(255, 234, 0, 0.597);
       letter-spacing: 0.2em;
       text-transform: uppercase;
       font-family: 'Inter', system-ui, sans-serif;
@@ -668,6 +668,24 @@
     }
 
 
+
+    /* ── TIKTOK GRID ── */
+    .tiktok-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .tiktok-grid .tiktok-embed {
+      margin: 0 !important;
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+
+    @media (max-width: 640px) {
+      .tiktok-grid { grid-template-columns: 1fr; }
+    }
 
     /* ── MOBILE ── */
     @media (max-width: 640px) {
@@ -1076,6 +1094,17 @@
           Reach out via the <a href="#" data-page="about">contact page</a> to get listed.
         </p>
       </div>
+
+      <div class="content-box">
+        <h2>@yuuki_tanuki</h2>
+        <p>Latest videos from our TikTok.</p>
+        <div class="tiktok-grid">
+          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@yuuki_tanuki/video/7605881489120562462" data-video-id="7605881489120562462"><section></section></blockquote>
+          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@yuuki_tanuki/video/7602791820359208222" data-video-id="7602791820359208222"><section></section></blockquote>
+          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@yuuki_tanuki/video/7594656751073447198" data-video-id="7594656751073447198"><section></section></blockquote>
+          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@yuuki_tanuki/video/7590699721539243295" data-video-id="7590699721539243295"><section></section></blockquote>
+        </div>
+      </div>
     </div>
 
     <!-- PAGE: ABOUT -->
@@ -1399,6 +1428,8 @@
       // page switching handled by existing nav listener
     })
   </script>
+
+  <script async src="https://www.tiktok.com/embed.js"></script>
 
   <script>
     // ── GLOWING EFFECT ──
