@@ -794,6 +794,23 @@
     .nav-members-btn:hover { color: #f5c518; }
     .nav-members-btn.signed-in { color: #f5c518; }
 
+    .range-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: color 0.15s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @media (max-width: 640px) {
+      .range-btn { font-size: 9px; padding: 3px 6px; }
+    }
+
   </style>
   <script type="importmap">
     {
@@ -857,6 +874,7 @@
         <div class="modal-error" id="login-error"></div>
       </div>
     </div>
+
 
     <!-- MARQUEE -->
     <div class="marquee-bar">
@@ -994,6 +1012,36 @@
 
       <!-- Signed in state -->
       <div id="members-content" style="display:none">
+
+        <!-- Members banner marquee -->
+        <div class="vel-marquee-wrap" style="padding:18px 0 10px">
+          <div class="vel-marquee" data-velocity="-0.5">
+            <div class="vel-marquee-inner" id="vmem-1"></div>
+          </div>
+          <div class="vel-marquee" data-velocity="-0.3">
+            <div class="vel-marquee-inner" id="vmem-2"></div>
+          </div>
+          <div class="vel-marquee" data-velocity="-0.2">
+            <div class="vel-marquee-inner" id="vmem-3"></div>
+          </div>
+        </div>
+        <script>
+        ;(function() {
+          const GAP = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+          const SEP = ' <b style="opacity:0.25;padding:0 1.5em;font-weight:400">·</b> '
+          const rows = [
+            { id: 'vmem-1', text: `MY LIFE${GAP}MY LIFE${GAP}MY LIFE${GAP}MY LIFE${GAP}MY LIFE${GAP}MY LIFE${GAP}` },
+            { id: 'vmem-2', text: `The past is just a story we tell ourselves.${SEP}Sometimes I think I have felt everything I'm ever gonna feel.${SEP}I've never loved anyone the way I love you.${SEP}I want to learn everything about everything.${SEP}You're part of something larger than yourself.${SEP}` },
+            { id: 'vmem-3', text: `First thought, best thought.${SEP}New vision — that's what we want.${SEP}I am not afraid. I was born to do this.${SEP}Death is the mother of beauty.${SEP}You have to be willing to lose everything.${SEP}` },
+          ]
+          rows.forEach(({ id, text }) => {
+            const el = document.getElementById(id)
+            if (!el) return
+            el.innerHTML = `<span style="display:inline;white-space:nowrap">${text}</span><span style="display:inline;white-space:nowrap">${text}</span>`
+          })
+        })()
+        </script>
+
         <div class="content-box">
           <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:4px;flex-wrap:wrap">
             <h2 style="margin-bottom:0;font-size:66px">Members Archive</h2>
@@ -1242,7 +1290,9 @@
         return
       }
 
-      _allMembersFiles = (files || []).filter(f => /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(f.name))
+      _allMembersFiles = (files || [])
+        .filter(f => /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(f.name))
+        .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
 
       if (!_allMembersFiles.length) {
         rangesWrap.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:Inter,sans-serif">No photos yet.</p>'
@@ -1258,22 +1308,9 @@
         const end = Math.min((i + 1) * batchSize, _allMembersFiles.length)
         const btn = document.createElement('button')
         btn.textContent = `${start}–${end}`
-        btn.style.cssText = `
-          background: transparent;
-          border: none;
-          color: rgba(255,255,255,0.6);
-          font-family: 'Inter', system-ui, sans-serif;
-          font-size: 13px;
-          font-style: normal;
-          font-weight: 400;
-          letter-spacing: 0.04em;
-          padding: 4px 10px;
-          cursor: pointer;
-          transition: color 0.15s;
-        `
+        btn.className = 'range-btn'
         btn.onmouseover = () => { if (btn.dataset.active !== '1') btn.style.color = '#f5c518' }
         btn.onmouseout = () => { if (btn.dataset.active !== '1') btn.style.color = 'rgba(255,255,255,0.6)' }
-        btn.style.transition = 'color 0.15s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1)'
         btn.addEventListener('click', () => {
           document.querySelectorAll('#members-ranges button').forEach(b => {
             b.dataset.active = '0'
