@@ -12,17 +12,17 @@
 
     :root {
       --glow-gradient:
-        radial-gradient(circle, #c0392b 10%, #c0392b00 20%),
-        radial-gradient(circle at 40% 40%, #8C0000 5%, #8C000000 15%),
-        radial-gradient(circle at 60% 60%, #4c7894 10%, #4c789400 20%),
-        radial-gradient(circle at 40% 60%, #7b2d8b 10%, #7b2d8b00 20%),
+        radial-gradient(circle, #ffffff 10%, #ffffff00 20%),
+        radial-gradient(circle at 40% 40%, #cccccc 5%, #cccccc00 15%),
+        radial-gradient(circle at 60% 60%, #ffffff 10%, #ffffff00 20%),
+        radial-gradient(circle at 40% 60%, #dddddd 10%, #dddddd00 20%),
         repeating-conic-gradient(
           from 236.84deg at 50% 50%,
-          #c0392b 0%,
-          #8C0000 calc(25% / 5),
-          #4c7894 calc(50% / 5),
-          #7b2d8b calc(75% / 5),
-          #c0392b calc(100% / 5)
+          #ffffff 0%,
+          #cccccc calc(25% / 5),
+          #ffffff calc(50% / 5),
+          #dddddd calc(75% / 5),
+          #ffffff calc(100% / 5)
         );
     }
 
@@ -63,7 +63,7 @@
     }
 
     .logo-header img {
-      max-width: 420px;
+      max-width: 357px;
       width: 100%;
       height: auto;
     }
@@ -126,65 +126,10 @@
       display: flex;
       align-items: center;
       gap: 2px;
-      background: rgba(5, 12, 35, 0.55);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: #000;
+      border: none;
       padding: 4px;
       border-radius: 9999px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-    }
-
-    .nav-indicator {
-      position: absolute;
-      top: 4px;
-      height: calc(100% - 8px);
-      background: rgba(140, 0, 0, 0.28);
-      border-radius: 9999px;
-      border: 1px solid rgba(140,0,0,0.35);
-      transition:
-        left 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        width 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 1;
-      overflow: visible;
-    }
-
-    .nav-lamp {
-      position: absolute;
-      top: -1px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 28px;
-      height: 3px;
-      background: #fff700;
-      border-radius: 0 0 4px 4px;
-      transition: none;
-    }
-
-    .nav-lamp::before {
-      content: '';
-      position: absolute;
-      top: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 48px;
-      height: 24px;
-      background: rgba(180, 0, 0, 0.3);
-      border-radius: 50%;
-      filter: blur(10px);
-    }
-
-    .nav-lamp::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 14px;
-      background: rgba(220, 0, 0, 0.2);
-      border-radius: 50%;
-      filter: blur(5px);
     }
 
     .nav-pill a {
@@ -203,43 +148,8 @@
     }
 
     .nav-pill a:hover { color: #fff; }
-    .nav-pill a.active { color: #fff; }
+    .nav-pill a.active { color: #000; background: #39ff14; border-radius: 0; }
 
-    /* ── GLOWING EFFECT ── */
-    .content-box::after,
-    .sidebar-box::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: var(--glowingeffect-border-width, 2px) solid transparent;
-      background: var(--gradient, var(--glow-gradient));
-      background-attachment: fixed;
-      opacity: var(--active, 0);
-      transition: opacity 0.3s ease;
-      -webkit-mask-clip: padding-box, border-box;
-      mask-clip: padding-box, border-box;
-      -webkit-mask-composite: destination-in;
-      mask-composite: intersect;
-      -webkit-mask-image:
-        linear-gradient(#0000, #0000),
-        conic-gradient(
-          from calc((var(--start, 0) - var(--spread, 40)) * 1deg),
-          #00000000 0deg,
-          #fff,
-          #00000000 calc(var(--spread, 40) * 2deg)
-        );
-      mask-image:
-        linear-gradient(#0000, #0000),
-        conic-gradient(
-          from calc((var(--start, 0) - var(--spread, 40)) * 1deg),
-          #00000000 0deg,
-          #fff,
-          #00000000 calc(var(--spread, 40) * 2deg)
-        );
-      pointer-events: none;
-      z-index: 10;
-    }
 
     /* ── CONTENT BOX ── */
     .content-box {
@@ -482,80 +392,6 @@
       padding: 16px 24px 16px 8px;
     }
 
-    /* ── WARP BACKGROUND ── */
-    .shader-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
-      background: hsl(260deg 100% 3%);
-      container-type: size;
-      clip-path: inset(0);
-    }
-
-    .warp-perspective {
-      position: absolute;
-      inset: 0;
-      perspective: 100px;
-      transform-style: preserve-3d;
-      clip-path: inset(0);
-      container-type: size;
-    }
-
-    .warp-face {
-      position: absolute;
-      --grid-color: rgba(255, 255, 255, 0.1);
-      background-image:
-        linear-gradient(var(--grid-color) 0 1px, transparent 1px 100%),
-        linear-gradient(90deg, var(--grid-color) 0 1px, transparent 1px 100%);
-      background-size: 5% 5%;
-      background-position: 50% -0.5px, 50% 50%;
-      container-type: inline-size;
-      transform-style: preserve-3d;
-      overflow: hidden;
-    }
-
-    .warp-face-top {
-      width: 100%;
-      height: 100cqmax;
-      top: 0; left: 0;
-      transform-origin: 50% 0%;
-      transform: rotateX(-90deg);
-    }
-
-    .warp-face-bottom {
-      width: 100%;
-      height: 100cqmax;
-      top: 100%; left: 0;
-      transform-origin: 50% 0%;
-      transform: rotateX(-90deg);
-    }
-
-    .warp-face-left {
-      height: 100cqmax;
-      top: 0; left: 0;
-      transform-origin: 0% 0%;
-      transform: rotate(90deg) rotateX(-90deg);
-    }
-
-    .warp-face-right {
-      height: 100cqmax;
-      top: 0; right: 0;
-      transform-origin: 100% 0%;
-      transform: rotate(-90deg) rotateX(-90deg);
-    }
-
-    .warp-beam {
-      position: absolute;
-      top: 0;
-      animation: warp-beam-move 3s linear infinite;
-    }
-
-    @keyframes warp-beam-move {
-      from { transform: translateX(-50%) translateY(300vh); }
-      to   { transform: translateX(-50%) translateY(-200%); }
-    }
 
     /* ── PAGE SECTIONS ── */
     .page-section {
@@ -748,7 +584,7 @@
       }
 
       .logo-header img {
-        max-width: 260px;
+        max-width: 221px;
       }
 
       .nav-pill {
@@ -997,14 +833,8 @@
     <!-- NAV -->
     <nav>
       <div class="nav-pill" id="nav-pill">
-        <div class="nav-indicator" id="nav-indicator">
-          <div class="nav-lamp"></div>
-        </div>
         <a href="#" class="active" data-page="home">HOME</a>
         <a href="#" data-page="pigeons">PIGEONS</a>
-        <a href="#" data-page="about">ABOUT</a>
-        <a href="#" data-page="photos">PHOTOS</a>
-        <a href="#" data-page="products">PRODUCTS</a>
         <a href="#" data-page="members" id="nav-members-link">MEMBERS</a>
       </div>
     </nav>
@@ -1038,15 +868,7 @@
     <!-- PAGE: HOME (default) -->
     <div class="page-section" id="sec-home">
       <section class="hero">
-        <div class="shader-bg" id="shader-container">
-          <div class="warp-perspective">
-            <div class="warp-face warp-face-top" id="warp-top"></div>
-            <div class="warp-face warp-face-bottom" id="warp-bottom"></div>
-            <div class="warp-face warp-face-left" id="warp-left"></div>
-            <div class="warp-face warp-face-right" id="warp-right"></div>
-          </div>
-        </div>
-        <div class="title-row">
+<div class="title-row">
           <div class="hero-title">
             1<br>LEG<br>GED<br><span class="red">PIG</span><br><span class="red">EON</span>
           </div>
@@ -1156,83 +978,6 @@
       </div>
     </div>
 
-    <!-- PAGE: ABOUT -->
-    <div class="page-section" id="sec-about" style="display:none">
-      <div class="retro-grid">
-        <div class="retro-grid-plane"><div class="retro-grid-lines"></div></div>
-        <div class="retro-grid-fade"></div>
-      </div>
-      <div class="content-box">
-        <h2>About</h2>
-        <div class="vel-marquee-wrap">
-          <div class="vel-marquee" id="vm-1" data-velocity="-3">
-            <div class="vel-marquee-inner">
-              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
-              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
-              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
-              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
-              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
-              <span>ГОЛУБИ УПРАВЛЯЮТ ВСЕМ!!! ★</span>
-            </div>
-          </div>
-          <div class="vel-marquee" id="vm-2" data-velocity="3">
-            <div class="vel-marquee-inner">
-              <span>ЭТО НЕ ПРОСТО ПТИЦА — ЭТО МЕНЕДЖМЕНТ!!! КУУ!!! ★</span>
-              <span>ЭТО НЕ ПРОСТО ПТИЦА — ЭТО МЕНЕДЖМЕНТ!!! КУУ!!! ★</span>
-              <span>ЭТО НЕ ПРОСТО ПТИЦА — ЭТО МЕНЕДЖМЕНТ!!! КУУ!!! ★</span>
-              <span>ЭТО НЕ ПРОСТО ПТИЦА — ЭТО МЕНЕДЖМЕНТ!!! КУУ!!! ★</span>
-            </div>
-          </div>
-          <div class="vel-marquee" id="vm-3" data-velocity="-2">
-            <div class="vel-marquee-inner">
-              <span>СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ ★ ЭЛИТА КРЫШ ★ КУУ КУУ КУУ ★</span>
-              <span>СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ ★ ЭЛИТА КРЫШ ★ КУУ КУУ КУУ ★</span>
-              <span>СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ ★ ЭЛИТА КРЫШ ★ КУУ КУУ КУУ ★</span>
-              <span>СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ ★ ЭЛИТА КРЫШ ★ КУУ КУУ КУУ ★</span>
-            </div>
-          </div>
-        </div>
-        <p style="margin-top:24px;font-size:12px;line-height:1.9;color:rgba(255,255,255,0.7)">
-          В каждом городе на Земле существует СЕКРЕТНАЯ СТРУКТУРА ВЛАСТИ, которую люди притворяются не замечать!!!
-          Правительства это отрицают!!! Экономисты это игнорируют!!! Но если вы посмотрите на ближайшую статую
-          и увидите голубя, который медленно моргает на солнце… ЭТО НЕ ПРОСТО ПТИЦА!!! Это МЕНЕДЖМЕНТ!!! КУУУ!!!
-        </p>
-        <p style="font-size:12px;line-height:1.9;color:rgba(255,255,255,0.7)">
-         Coo cooo cococoo coo coo coo coo
-        </p>
-
-        <div class="image-row">
-          <img src="https://images.unsplash.com/photo-1549450468-e036c2759988?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="MLC Centre Sydney — low angle view" />
-          <img src="https://images.unsplash.com/photo-1546090132-ca96bcb81570?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Curved building at Martin Place Sydney" />
-          <img src="https://images.unsplash.com/photo-1549448380-10cbfd2c1e94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="MLC Centre Sydney — corner view" />
-        </div>
-      </div>
-    </div>
-
-    <!-- PAGE: PHOTOS -->
-    <div class="page-section" id="sec-photos" style="display:none">
-      <div class="retro-grid">
-        <div class="retro-grid-plane"><div class="retro-grid-lines"></div></div>
-        <div class="retro-grid-fade"></div>
-      </div>
-      <div class="content-box">
-        <h2>Photos</h2>
-        <p>Photo archive coming soon.</p>
-      </div>
-    </div>
-
-    <!-- PAGE: PRODUCTS -->
-    <div class="page-section" id="sec-products" style="display:none">
-      <div class="retro-grid">
-        <div class="retro-grid-plane"><div class="retro-grid-lines"></div></div>
-        <div class="retro-grid-fade"></div>
-      </div>
-      <div class="content-box">
-        <h2>Products</h2>
-        <p>Coming soon.</p>
-      </div>
-    </div>
-
     <!-- PAGE: MEMBERS -->
     <div class="page-section" id="sec-members" style="display:none">
       <div class="retro-grid">
@@ -1250,13 +995,30 @@
       <!-- Signed in state -->
       <div id="members-content" style="display:none">
         <div class="content-box">
-          <h2>Welcome, Member</h2>
-          <p id="members-greeting"></p>
-          <div id="members-photos-wrap" style="margin-top:16px">
-            <p style="color:rgba(255,255,255,0.4);font-size:11px">Loading photos…</p>
+          <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:4px;flex-wrap:wrap">
+            <h2 style="margin-bottom:0">Members Archive</h2>
+            <span id="members-greeting" style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.35)"></span>
           </div>
-          <p style="margin-top:16px">
-            <a href="#" id="signout-link" style="color:rgba(255,255,255,0.4);font-size:11px">Sign out</a>
+
+          <!-- Range index -->
+          <div id="members-index">
+<div id="members-ranges" style="display:flex;flex-wrap:wrap;gap:8px">
+              <p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:'Inter',sans-serif">Loading…</p>
+            </div>
+          </div>
+
+          <!-- Gallery view -->
+          <div id="members-gallery" style="display:none">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+              <button id="gallery-back" style="background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);font-family:'Inter',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:6px 14px;cursor:pointer;transition:color 0.2s,border-color 0.2s" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.4)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.borderColor='rgba(255,255,255,0.15)'">← Back</button>
+              <span id="gallery-title" style="font-family:'Bodoni Moda',Georgia,serif;font-size:16px;font-weight:700;font-style:italic;color:#f5c518;letter-spacing:0.08em;text-transform:uppercase"></span>
+            </div>
+            <div id="gallery-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px"></div>
+            <p style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.25);margin-top:10px;text-align:right" id="gallery-count"></p>
+          </div>
+
+          <p style="margin-top:24px">
+            <a href="#" id="signout-link" style="color:rgba(255,255,255,0.4);font-size:11px;font-family:'Inter',sans-serif">Sign out</a>
           </p>
         </div>
       </div>
@@ -1272,64 +1034,10 @@
   </div>
 
   <script>
-    // ── WARP BACKGROUND BEAM GENERATOR ──
-    ;(function setupWarpBackground() {
-      const BEAMS_PER_SIDE = 3
-      const BEAM_SIZE = 5        // % width of each beam
-      const DURATION_BASE = 3   // seconds
-      const DURATION_SPREAD = 2
-      const DELAY_MAX = 3
-
-      const faces = ['top', 'bottom', 'left', 'right']
-
-      faces.forEach(side => {
-        const face = document.getElementById('warp-' + side)
-        if (!face) return
-
-        // Set left/right face widths to container height
-        if (side === 'left' || side === 'right') {
-          const hero = document.querySelector('.hero')
-          if (hero) face.style.width = hero.offsetHeight + 'px'
-        }
-
-        const cellsPerSide = Math.floor(100 / BEAM_SIZE)
-        const step = cellsPerSide / BEAMS_PER_SIDE
-
-        for (let i = 0; i < BEAMS_PER_SIDE; i++) {
-          const xCell = Math.floor(i * step)
-          const xPct = xCell * BEAM_SIZE
-          const delay = Math.random() * DELAY_MAX
-          const hue = Math.floor(Math.random() * 360)
-          const ar = Math.floor(Math.random() * 10) + 1
-          const duration = DURATION_BASE + Math.random() * DURATION_SPREAD
-
-          const beam = document.createElement('span')
-          beam.className = 'warp-beam'
-          beam.style.left = xPct + '%'
-          beam.style.width = BEAM_SIZE + '%'
-          beam.style.aspectRatio = '1 / ' + ar
-          beam.style.background = 'linear-gradient(hsl(' + hue + ' 80% 60%), transparent)'
-          beam.style.animationDuration = duration + 's'
-          beam.style.animationDelay = '-' + delay + 's'
-          face.appendChild(beam)
-        }
-      })
-    })()
-  </script>
-
-  <script>
-    // ── TUBELIGHT NAV + PAGE SWITCHING ──
+    // ── NAV + PAGE SWITCHING ──
     const navPill = document.getElementById('nav-pill')
-    const indicator = document.getElementById('nav-indicator')
     const navLinks = navPill.querySelectorAll('a[data-page]')
     const sections = document.querySelectorAll('.page-section')
-
-    function moveIndicator(el) {
-      const pillRect = navPill.getBoundingClientRect()
-      const elRect = el.getBoundingClientRect()
-      indicator.style.left = (elRect.left - pillRect.left) + 'px'
-      indicator.style.width = elRect.width + 'px'
-    }
 
     function showPage(page) {
       sections.forEach(s => s.style.display = 'none')
@@ -1348,23 +1056,9 @@
       // Update nav active state
       navLinks.forEach(l => l.classList.remove('active'))
       const navLink = navPill.querySelector(`a[data-page="${page}"]`)
-      if (navLink) {
-        navLink.classList.add('active')
-        moveIndicator(navLink)
-      }
+      if (navLink) navLink.classList.add('active')
       showPage(page)
       window.scrollTo({ top: 0, behavior: 'smooth' })
-    })
-
-    // Init on load
-    requestAnimationFrame(() => {
-      const active = navPill.querySelector('a.active')
-      if (active) moveIndicator(active)
-    })
-
-    window.addEventListener('resize', () => {
-      const active = navPill.querySelector('a.active')
-      if (active) moveIndicator(active)
     })
   </script>
 
@@ -1520,34 +1214,122 @@
       if (user) {
         locked.style.display  = 'none'
         content.style.display = 'block'
-        greeting.textContent  = 'Signed in as ' + user.email
+        greeting.textContent  = user.email
         membersLink.classList.add('signed-in')
+        // Reset to index view on each login
+        document.getElementById('members-gallery').style.display = 'none'
+        document.getElementById('members-index').style.display = 'block'
+        document.getElementById('members-ranges').innerHTML =
+          '<p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:Inter,sans-serif">Loading…</p>'
         loadMembersPhotos()
       } else {
         locked.style.display  = 'block'
         content.style.display = 'none'
         membersLink.classList.remove('signed-in')
-        document.getElementById('members-photos-wrap').innerHTML =
-          '<p style="color:rgba(255,255,255,0.4);font-size:11px">Loading photos…</p>'
+        _allMembersFiles = []
       }
     }
 
-    async function loadMembersPhotos() {
-      const wrap = document.getElementById('members-photos-wrap')
-      const files = ['Photo on 3-23-25 at 1.03 AM.jpg']
+    let _allMembersFiles = []
 
-      const imgs = await Promise.all(files.map(async name => {
+    async function loadMembersPhotos() {
+      const rangesWrap = document.getElementById('members-ranges')
+
+      // List all files in bucket, sorted by name
+      const { data: files, error } = await _supabase.storage
+        .from('members-photos')
+        .list('', { limit: 1000, sortBy: { column: 'name', order: 'asc' } })
+
+      if (error) {
+        rangesWrap.innerHTML = '<p style="color:#e55;font-size:11px;font-family:Inter,sans-serif">Error loading photos.</p>'
+        return
+      }
+
+      // Filter to image files only
+      _allMembersFiles = (files || []).filter(f => /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(f.name))
+
+      if (_allMembersFiles.length === 0) {
+        rangesWrap.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:Inter,sans-serif">No photos yet.</p>'
+        return
+      }
+
+      const batchSize = 25
+      const numBatches = Math.ceil(_allMembersFiles.length / batchSize)
+      rangesWrap.innerHTML = ''
+
+      for (let i = 0; i < numBatches; i++) {
+        const start = i * batchSize + 1
+        const end = Math.min((i + 1) * batchSize, _allMembersFiles.length)
+        const btn = document.createElement('button')
+        btn.textContent = `${start}–${end}`
+        btn.style.cssText = `
+          background: transparent;
+          border: none;
+          color: rgba(255,255,255,0.6);
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 400;
+          letter-spacing: 0.04em;
+          padding: 4px 10px;
+          cursor: pointer;
+          transition: color 0.15s;
+        `
+        btn.onmouseover = () => { btn.style.color = '#f5c518' }
+        btn.onmouseout = () => { btn.style.color = 'rgba(255,255,255,0.6)' }
+        btn.addEventListener('click', () => showGallery(i * batchSize, batchSize, `${start}–${end}`))
+        rangesWrap.appendChild(btn)
+      }
+    }
+
+    async function showGallery(offset, batchSize, label) {
+      const batch = _allMembersFiles.slice(offset, offset + batchSize)
+      document.getElementById('members-index').style.display = 'none'
+      const gallery = document.getElementById('members-gallery')
+      gallery.style.display = 'block'
+      document.getElementById('gallery-title').textContent = `Photos ${label}`
+      document.getElementById('gallery-count').textContent = ''
+
+      const grid = document.getElementById('gallery-grid')
+      grid.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:Inter,sans-serif;grid-column:1/-1;padding:16px 0">Loading…</p>'
+
+      // Responsive grid: 2 cols on mobile, 5 on desktop
+      grid.style.gridTemplateColumns = window.innerWidth < 640 ? 'repeat(2,1fr)' : 'repeat(5,1fr)'
+
+      const urls = await Promise.all(batch.map(async f => {
         const { data, error } = await _supabase.storage
           .from('members-photos')
-          .createSignedUrl(name, 3600) // URL valid for 1 hour
-        if (error || !data) return ''
-        return `<img src="${data.signedUrl}" alt="Members photo"
-          style="max-width:100%;border-radius:6px;display:block;margin-bottom:10px;
-          filter:saturate(0.85) contrast(1.1);" />`
+          .createSignedUrl(f.name, 3600)
+        return (error || !data) ? null : { url: data.signedUrl, name: f.name }
       }))
 
-      wrap.innerHTML = imgs.join('') || '<p style="color:rgba(255,255,255,0.4);font-size:11px">No photos yet.</p>'
+      const valid = urls.filter(Boolean)
+      grid.innerHTML = valid.map(({ url, name }) => {
+        const mt = Math.floor(Math.random() * 24)
+        const mb = Math.floor(Math.random() * 24)
+        const ml = Math.floor(Math.random() * 12)
+        const mr = Math.floor(Math.random() * 12)
+        return `<div style="position:relative;aspect-ratio:1;overflow:hidden;background:#111;margin:${mt}px ${mr}px ${mb}px ${ml}px">
+          <img src="${url}" alt="${name}"
+            style="width:100%;height:100%;object-fit:cover;display:block;
+            filter:saturate(0.85) contrast(1.05);
+            transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s ease;
+            cursor:pointer"
+            onmouseover="this.style.transform='scale(1.06)';this.style.opacity='0.85'"
+            onmouseout="this.style.transform='scale(1)';this.style.opacity='1'"
+            onclick="window.open('${url}','_blank')"
+            loading="lazy"
+          />
+        </div>`
+      }).join('') || '<p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:Inter,sans-serif;grid-column:1/-1">No photos in this batch.</p>'
+
+      document.getElementById('gallery-count').textContent = `${valid.length} photo${valid.length !== 1 ? 's' : ''}`
     }
+
+    document.getElementById('gallery-back').addEventListener('click', () => {
+      document.getElementById('members-gallery').style.display = 'none'
+      document.getElementById('members-index').style.display = 'block'
+    })
 
     // Check session on load
     updateMembersUI()
@@ -1563,67 +1345,6 @@
 
   <script async src="https://www.tiktok.com/embed.js"></script>
 
-  <script>
-    // ── GLOWING EFFECT ──
-    const glowCards = document.querySelectorAll('.content-box, .sidebar-box')
-    const SPREAD = 40
-    const PROXIMITY = 64
-    const INACTIVE_ZONE = 0.01
-    const cardState = new Map()
-
-    glowCards.forEach(el => {
-      el.style.setProperty('--spread', SPREAD)
-      el.style.setProperty('--glowingeffect-border-width', '2px')
-      el.style.setProperty('--start', '0')
-      el.style.setProperty('--active', '0')
-      cardState.set(el, { currentAngle: 0, targetAngle: 0, rafId: 0 })
-    })
-
-    function animateAngle(el) {
-      const state = cardState.get(el)
-      const diff = state.targetAngle - state.currentAngle
-      if (Math.abs(diff) > 0.1) {
-        state.currentAngle += diff * 0.08
-        el.style.setProperty('--start', String(state.currentAngle))
-        state.rafId = requestAnimationFrame(() => animateAngle(el))
-      } else {
-        state.currentAngle = state.targetAngle
-        el.style.setProperty('--start', String(state.currentAngle))
-      }
-    }
-
-    document.body.addEventListener('pointermove', (e) => {
-      glowCards.forEach(el => {
-        const rect = el.getBoundingClientRect()
-        const cx = rect.left + rect.width * 0.5
-        const cy = rect.top + rect.height * 0.5
-        const dist = Math.hypot(e.clientX - cx, e.clientY - cy)
-        const inactiveRadius = 0.5 * Math.min(rect.width, rect.height) * INACTIVE_ZONE
-
-        if (dist < inactiveRadius) {
-          el.style.setProperty('--active', '0')
-          return
-        }
-
-        const isNear =
-          e.clientX > rect.left - PROXIMITY &&
-          e.clientX < rect.right + PROXIMITY &&
-          e.clientY > rect.top - PROXIMITY &&
-          e.clientY < rect.bottom + PROXIMITY
-
-        el.style.setProperty('--active', isNear ? '1' : '0')
-        if (!isNear) return
-
-        const state = cardState.get(el)
-        const angle = (180 * Math.atan2(e.clientY - cy, e.clientX - cx)) / Math.PI + 90
-        const angleDiff = ((angle - state.currentAngle + 180) % 360) - 180
-        state.targetAngle = state.currentAngle + angleDiff
-
-        cancelAnimationFrame(state.rafId)
-        animateAngle(el)
-      })
-    }, { passive: true })
-  </script>
 
 </body>
 </html>
