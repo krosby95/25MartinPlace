@@ -516,17 +516,53 @@
 
 
 
+    /* ── MEMBERS PAGE OVERRIDES ── */
+    #sec-members ~ footer,
+    body.members-active footer {
+      background: transparent;
+      border-color: transparent;
+      color: #000;
+    }
+    body.members-active footer a { color: #000; }
+    #sec-members .range-btn { color: rgba(0,0,0,0.6); }
+    #sec-members .range-btn:hover,
+    #sec-members .range-btn.active { color: #000; }
+    #sec-members .content-box {
+      background: transparent;
+      border: none;
+    }
+    #sec-members .content-box h2,
+    #sec-members .content-box p,
+    #sec-members .content-box a,
+    #sec-members .content-box strong,
+    #sec-members .content-box span {
+      color: #000 !important;
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-style: normal !important;
+    }
+    #sec-members .content-box a:hover { text-decoration: underline; }
+
     /* ── VELOCITY MARQUEE ── */
     .vel-marquee-wrap {
       overflow: hidden;
-      margin: 8px -28px;
+      padding: 20px 0;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .vel-marquee {
       overflow: hidden;
       white-space: nowrap;
       padding: 4px 0;
+      margin-bottom: -18px;
+      position: relative;
     }
+
+    .vel-marquee:nth-child(1) { transform: rotate(-3deg); }
+    .vel-marquee:nth-child(2) { transform: rotate(1.5deg); }
+    .vel-marquee:nth-child(3) { transform: rotate(-1deg); }
 
     .vel-marquee-inner {
       display: inline-flex;
@@ -535,11 +571,11 @@
     }
 
     .vel-marquee-inner span {
-      font-family: 'Bodoni Moda', Georgia, serif;
+      font-family: Arial, Helvetica, sans-serif;
       font-size: clamp(22px, 5vw, 52px);
-      font-weight: 900;
-      font-style: italic;
-      letter-spacing: -0.03em;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0;
       line-height: 1.1;
       color: #fff;
       padding-right: 40px;
@@ -547,11 +583,11 @@
     }
 
     .vel-marquee:nth-child(2) .vel-marquee-inner span {
-      color: #f5c518;
+      color: #fff;
     }
 
     .vel-marquee:nth-child(3) .vel-marquee-inner span {
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.5);
       font-size: clamp(14px, 3vw, 32px);
     }
 
@@ -997,11 +1033,7 @@
     </div>
 
     <!-- PAGE: MEMBERS -->
-    <div class="page-section" id="sec-members" style="display:none">
-      <div class="retro-grid">
-        <div class="retro-grid-plane"><div class="retro-grid-lines"></div></div>
-        <div class="retro-grid-fade"></div>
-      </div>
+    <div class="page-section" id="sec-members" style="display:none;background:#39ff14">
 
       <!-- Not signed in state -->
       <div class="content-box" id="members-locked">
@@ -1045,26 +1077,26 @@
         <div class="content-box">
           <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:4px;flex-wrap:wrap">
             <h2 style="margin-bottom:0;font-size:66px">Members Archive</h2>
-            <span id="members-greeting" style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.35)"></span>
+            <span id="members-greeting" style="font-family:Arial,sans-serif;font-size:11px;color:rgba(0,0,0,0.5)"></span>
           </div>
 
           <!-- Range index (always visible) -->
           <div id="members-ranges" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
-            <p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:'Inter',sans-serif">Loading…</p>
+            <p style="color:rgba(0,0,0,0.5);font-size:11px;font-family:Arial,sans-serif">Loading…</p>
           </div>
 
           <!-- Gallery view -->
           <div id="members-gallery" style="display:none">
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-              <button id="gallery-back" style="background:none;border:none;color:rgba(255,255,255,0.5);font-family:'Inter',system-ui,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:0;cursor:pointer;transition:color 0.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">← Back</button>
-              <span id="gallery-title" style="font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);letter-spacing:0.08em;text-transform:uppercase"></span>
+              <button id="gallery-back" style="background:none;border:none;color:rgba(0,0,0,0.5);font-family:Arial,sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:0;cursor:pointer;transition:color 0.2s" onmouseover="this.style.color='#000'" onmouseout="this.style.color='rgba(0,0,0,0.5)'">← Back</button>
+              <span id="gallery-title" style="font-family:Arial,sans-serif;font-size:13px;font-weight:400;color:rgba(0,0,0,0.5);letter-spacing:0.08em;text-transform:uppercase"></span>
             </div>
             <div id="gallery-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin:0 -28px"></div>
-            <p style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.25);margin-top:10px;text-align:right" id="gallery-count"></p>
+            <p style="font-family:Arial,sans-serif;font-size:10px;color:rgba(0,0,0,0.4);margin-top:10px;text-align:right" id="gallery-count"></p>
           </div>
 
           <p style="margin-top:24px">
-            <a href="#" id="signout-link" style="color:rgba(255,255,255,0.4);font-size:11px;font-family:'Inter',sans-serif">Sign out</a>
+            <a href="#" id="signout-link" style="color:rgba(0,0,0,0.5);font-size:11px;font-family:Arial,sans-serif">Sign out</a>
           </p>
         </div>
       </div>
@@ -1091,6 +1123,16 @@
       if (target) target.style.display = 'block'
       const pigeonEl = document.getElementById('pigeon-home')
       if (pigeonEl) pigeonEl.style.display = page === 'home' ? 'block' : 'none'
+      document.body.style.background = page === 'members' ? '#39ff14' : ''
+      document.body.classList.toggle('members-active', page === 'members')
+      const logoImg = document.querySelector('.logo-header img')
+      if (logoImg) {
+        logoImg.src = page === 'members'
+          ? 'brand_assets/spinosaurus_transparent.png'
+          : 'brand_assets/one_legged_pigeon_logo_transparent.png'
+        logoImg.style.filter = page === 'members' ? 'invert(1)' : ''
+        logoImg.style.maxWidth = page === 'members' ? '260px' : '357px'
+      }
     }
 
     // Handle inline links that switch pages (e.g. data-page on anchor tags in content)
@@ -1330,7 +1372,9 @@
       const batch = _allMembersFiles.slice(offset, offset + batchSize)
       const gallery = document.getElementById('members-gallery')
       gallery.style.display = 'block'
-      document.getElementById('gallery-title').textContent = `Photos ${label}`
+      const rangeTitles = { '1–25': 'Night Out With Aloha Sydney' }
+      const customTitle = rangeTitles[label]
+      document.getElementById('gallery-title').textContent = customTitle ? `${label} — ${customTitle}` : `Photos ${label}`
       document.getElementById('gallery-count').textContent = ''
 
       const grid = document.getElementById('gallery-grid')
