@@ -1372,7 +1372,7 @@
       const batch = _allMembersFiles.slice(offset, offset + batchSize)
       const gallery = document.getElementById('members-gallery')
       gallery.style.display = 'block'
-      const rangeTitles = { '1–25': 'Night Out With Aloha Sydney' }
+      const rangeTitles = { '1–25': 'Night Out With Aloha Sydney', '26–50': 'Bondi Beach Party', '51–75': 'Bondi Beach Party', '76–100': 'Bondi Beach Party', '101–125': 'Bondi Beach Party', '126–150': 'Bondi Beach Party', '176–200': 'Mardi Gras 2026', '201–225': "Mardi Gras Pre's @ Oisín's House", '226–250': 'Poof Doof @ IVY Mardi Gras 2026' }
       const customTitle = rangeTitles[label]
       document.getElementById('gallery-title').textContent = customTitle ? `${label} — ${customTitle}` : `Photos ${label}`
       document.getElementById('gallery-count').textContent = ''
