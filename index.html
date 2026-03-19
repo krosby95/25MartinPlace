@@ -1377,17 +1377,21 @@
       if (urlErr || !data) return
       const finalData = data
       const vid = document.createElement('video')
-      vid.src = finalData.signedUrl
-      vid.autoplay = true
+      vid.setAttribute('autoplay', '')
+      vid.setAttribute('muted', '')
+      vid.setAttribute('loop', '')
+      vid.setAttribute('playsinline', '')
       vid.muted = true
-      vid.loop = true
-      vid.playsInline = true
-      vid.controls = true
+      vid.controls = false
+      vid.src = finalData.signedUrl
       vid.style.cssText = 'width:100%;max-height:480px;object-fit:cover;display:block'
       vid.onerror = () => {
         wrap.innerHTML = '<p style="color:rgba(255,255,255,0.5);font-family:Arial,sans-serif;font-size:11px;padding:8px 0">Video format not supported by browser. Convert files to MP4 in Supabase.</p>'
       }
+      vid.style.cursor = 'pointer'
+      vid.addEventListener('click', () => { vid.muted = !vid.muted })
       wrap.appendChild(vid)
+      vid.play().catch(() => {})
     }
 
     let _allMembersFiles = []
@@ -1443,6 +1447,8 @@
 
     async function showGallery(offset, batchSize, label) {
       const batch = _allMembersFiles.slice(offset, offset + batchSize)
+      const vidWrap = document.getElementById('members-videos')
+      if (vidWrap) vidWrap.style.display = 'none'
       const gallery = document.getElementById('members-gallery')
       gallery.style.display = 'block'
       const rangeTitles = { '1–25': 'Night Out With Aloha Sydney', '26–50': 'Bondi Beach Party', '51–75': 'Bondi Beach Party', '76–100': 'Bondi Beach Party', '101–125': 'Bondi Beach Party', '126–150': 'Bondi Beach Party', '176–200': 'Mardi Gras 2026', '201–225': "Mardi Gras Pre's @ Oisín's House", '226–250': 'Poof Doof @ IVY Mardi Gras 2026' }
