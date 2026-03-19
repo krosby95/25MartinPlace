@@ -1395,10 +1395,14 @@
     }
 
     let _allMembersFiles = []
+    const _urlCache = {}
 
     async function loadMembersPhotos() {
       const rangesWrap = document.getElementById('members-ranges')
       rangesWrap.style.display = 'flex'
+
+      // Use cached file list if available
+      if (_allMembersFiles.length) { buildRangeButtons(rangesWrap); return }
 
       const { data: files, error } = await _supabase.storage
         .from('members-photos')
@@ -1417,7 +1421,10 @@
         rangesWrap.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:Inter,sans-serif">No photos yet.</p>'
         return
       }
+      buildRangeButtons(rangesWrap)
+    }
 
+    function buildRangeButtons(rangesWrap) {
       const batchSize = 25
       const numBatches = Math.ceil(_allMembersFiles.length / batchSize)
       rangesWrap.innerHTML = ''
@@ -1462,17 +1469,24 @@
       // Responsive grid: 2 cols on mobile, 5 on desktop
       grid.style.gridTemplateColumns = window.innerWidth < 640 ? 'repeat(2,1fr)' : 'repeat(5,1fr)'
 
-      const urls = await Promise.all(batch.map(async f => {
-        const { data, error } = await _supabase.storage
+      // Use cached URLs if available
+      let urls
+      if (_urlCache[label]) {
+        urls = _urlCache[label]
+      } else {
+        const { data: signedUrls } = await _supabase.storage
           .from('members-photos')
-          .createSignedUrl(f.name, 3600)
-        return (error || !data) ? null : { url: data.signedUrl, name: f.name }
-      }))
+          .createSignedUrls(batch.map(f => f.name), 7200)
+        urls = (signedUrls || []).map((s, i) =>
+          s.error ? null : { url: s.signedUrl, name: batch[i].name }
+        )
+        _urlCache[label] = urls
+      }
 
       const valid = urls.filter(Boolean)
       grid.innerHTML = valid.map(({ url, name }) =>
         `<div style="position:relative;aspect-ratio:1;overflow:hidden;background:#111">
-          <img src="${url}" alt="${name}"
+          <img src="${url}" alt="${name}" loading="lazy"
             style="width:100%;height:100%;object-fit:cover;display:block;
             filter:saturate(0.85) contrast(1.05);
             transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s ease;
