@@ -31,6 +31,7 @@
       margin: 8px;
       font-family: 'Inter', system-ui, sans-serif;
       color: #ffffff;
+      overflow-x: hidden;
       min-height: 100vh;
     }
 
@@ -1101,6 +1102,9 @@
         })()
         </script>
 
+        <!-- Random videos -->
+        <div id="members-videos" style="margin:0 0 24px"></div>
+
         <div class="content-box">
           <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:4px;flex-wrap:wrap">
             <h2 style="margin-bottom:0;font-size:66px">Members Archive</h2>
@@ -1309,6 +1313,7 @@
       } else {
         closeModal()
         updateMembersUI()
+        scheduleAutoSignout()
       }
     })
 
@@ -1319,6 +1324,17 @@
       await _supabase.auth.signOut()
       updateMembersUI()
     })
+
+    // Auto sign-out after 2 hours
+    let _autoSignoutTimer = null
+    function scheduleAutoSignout() {
+      clearTimeout(_autoSignoutTimer)
+      _autoSignoutTimer = setTimeout(async () => {
+        await _supabase.auth.signOut()
+        updateMembersUI()
+        alert('You have been signed out after 2 hours.')
+      }, 2 * 60 * 60 * 1000)
+    }
 
     async function updateMembersUI() {
       const { data: { session } } = await _supabase.auth.getSession()
@@ -1338,12 +1354,40 @@
         document.getElementById('members-ranges').innerHTML =
           '<p style="color:rgba(255,255,255,0.4);font-size:11px;font-family:Inter,sans-serif">Loading…</p>'
         loadMembersPhotos()
+        loadMembersVideos()
       } else {
         locked.style.display  = 'block'
         content.style.display = 'none'
         membersLink.classList.remove('signed-in')
         _allMembersFiles = []
       }
+    }
+
+    async function loadMembersVideos() {
+      const wrap = document.getElementById('members-videos')
+      wrap.innerHTML = ''
+      const { data: files, error } = await _supabase.storage
+        .from('videos')
+        .list('', { limit: 100, sortBy: { column: 'name', order: 'asc' } })
+      if (error || !files) return
+      const videos = files.filter(f => /\.(mp4|mov|webm|m4v|avi)$/i.test(f.name))
+      if (!videos.length) return
+      const pick = videos[Math.floor(Math.random() * videos.length)]
+      const { data, error: urlErr } = await _supabase.storage.from('videos').createSignedUrl(pick.name, 3600)
+      if (urlErr || !data) return
+      const finalData = data
+      const vid = document.createElement('video')
+      vid.src = finalData.signedUrl
+      vid.autoplay = true
+      vid.muted = true
+      vid.loop = true
+      vid.playsInline = true
+      vid.controls = true
+      vid.style.cssText = 'width:100%;max-height:480px;object-fit:cover;display:block'
+      vid.onerror = () => {
+        wrap.innerHTML = '<p style="color:rgba(255,255,255,0.5);font-family:Arial,sans-serif;font-size:11px;padding:8px 0">Video format not supported by browser. Convert files to MP4 in Supabase.</p>'
+      }
+      wrap.appendChild(vid)
     }
 
     let _allMembersFiles = []
