@@ -1160,11 +1160,15 @@
       if (vnews) vnews.style.display = page === 'members' ? 'block' : 'none'
       const logoImg = document.querySelector('.logo-header img')
       if (logoImg) {
-        logoImg.src = page === 'members'
-          ? '/brand_assets/spinosaurus_transparent.png'
-          : '/brand_assets/one_legged_pigeon_logo_transparent.png'
-        logoImg.style.filter = page === 'members' ? 'invert(1)' : ''
-        logoImg.style.maxWidth = page === 'members' ? '260px' : '357px'
+        if (page === 'members') {
+          logoImg.src = '/brand_assets/spinosaurus_transparent.png'
+          logoImg.style.filter = 'invert(1)'
+          logoImg.style.maxWidth = '260px'
+        } else {
+          logoImg.src = '/brand_assets/one_legged_pigeon_logo_transparent.png'
+          logoImg.style.removeProperty('filter')
+          logoImg.style.maxWidth = '357px'
+        }
       }
     }
 
@@ -1265,7 +1269,8 @@
     // ── AUTH ──
     const _supabase = supabase.createClient(
       'https://ufpwgocakgzqskbbfyin.supabase.co',
-      'sb_publishable_7ABOcirkhbf1pM_3EAfWSA_bdFPuU7r'
+      'sb_publishable_7ABOcirkhbf1pM_3EAfWSA_bdFPuU7r',
+      { auth: { storage: sessionStorage, persistSession: true } }
     )
 
     const loginModal   = document.getElementById('login-modal')
@@ -1458,7 +1463,7 @@
       if (vidWrap) vidWrap.style.display = 'none'
       const gallery = document.getElementById('members-gallery')
       gallery.style.display = 'block'
-      const rangeTitles = { '1–25': 'Night Out With Aloha Sydney', '26–50': 'Bondi Beach Party', '51–75': 'Bondi Beach Party', '76–100': 'Bondi Beach Party', '101–125': 'Bondi Beach Party', '126–150': 'Bondi Beach Party', '176–200': 'Mardi Gras 2026', '201–225': "Mardi Gras Pre's @ Oisín's House", '226–250': 'Poof Doof @ IVY Mardi Gras 2026' }
+      const rangeTitles = { '1–25': 'Night Out With Aloha Sydney', '26–50': 'Bondi Beach Party', '51–75': 'Bondi Beach Party', '76–100': 'Bondi Beach Party', '101–125': 'Bondi Beach Party', '126–150': 'Bondi Beach Party', '176–200': 'Mardi Gras 2026', '201–225': "Mardi Gras Pre's @ Oisín's House", '226–250': 'Poof Doof @ IVY Mardi Gras 2026', '351–375': 'NSW Art Gallery with Fox Friends' }
       const customTitle = rangeTitles[label]
       document.getElementById('gallery-title').textContent = customTitle ? `${label} — ${customTitle}` : `Photos ${label}`
       document.getElementById('gallery-count').textContent = ''
