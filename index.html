@@ -1339,6 +1339,13 @@
     loginPwd.addEventListener('keydown', e => { if (e.key === 'Enter') loginSubmit.click() })
 
     // ── PASSWORD RECOVERY ──
+    // Detect recovery via URL hash (implicit flow) or query param (PKCE flow)
+    const _hashParams = new URLSearchParams(window.location.hash.replace('#', ''))
+    const _queryParams = new URLSearchParams(window.location.search)
+    if (_hashParams.get('type') === 'recovery' || _queryParams.get('type') === 'recovery') {
+      document.getElementById('reset-modal').classList.add('open')
+    }
+
     _supabase.auth.onAuthStateChange((event) => {
       if (event === 'PASSWORD_RECOVERY') {
         document.getElementById('reset-modal').classList.add('open')
