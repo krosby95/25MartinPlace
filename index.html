@@ -911,6 +911,20 @@
       </div>
     </div>
 
+    <!-- RESET PASSWORD MODAL -->
+    <div class="modal-overlay" id="reset-modal">
+      <div class="modal-box" style="position:relative">
+        <h2>Set New Password</h2>
+        <p>Enter your new password below.</p>
+        <div class="modal-field">
+          <label>New Password</label>
+          <input type="password" id="reset-password" placeholder="••••••••" autocomplete="new-password" />
+        </div>
+        <button class="modal-submit" id="reset-submit">Update Password</button>
+        <div class="modal-error" id="reset-error"></div>
+      </div>
+    </div>
+
 
     <!-- MARQUEE -->
     <div class="marquee-bar">
@@ -1323,6 +1337,33 @@
     })
 
     loginPwd.addEventListener('keydown', e => { if (e.key === 'Enter') loginSubmit.click() })
+
+    // ── PASSWORD RECOVERY ──
+    _supabase.auth.onAuthStateChange((event) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        document.getElementById('reset-modal').classList.add('open')
+      }
+    })
+
+    document.getElementById('reset-submit').addEventListener('click', async () => {
+      const newPassword = document.getElementById('reset-password').value
+      const resetError  = document.getElementById('reset-error')
+      const resetSubmit = document.getElementById('reset-submit')
+      if (!newPassword || newPassword.length < 6) { resetError.textContent = 'Password must be at least 6 characters.'; return }
+      resetSubmit.textContent = 'Updating…'
+      resetSubmit.disabled = true
+      const { error } = await _supabase.auth.updateUser({ password: newPassword })
+      resetSubmit.textContent = 'Update Password'
+      resetSubmit.disabled = false
+      if (error) {
+        resetError.textContent = error.message
+      } else {
+        document.getElementById('reset-modal').classList.remove('open')
+        document.getElementById('reset-password').value = ''
+        alert('Password updated! You are now signed in.')
+        updateMembersUI()
+      }
+    })
 
     document.getElementById('signout-link').addEventListener('click', async e => {
       e.preventDefault()
